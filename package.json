@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.13.23",
+    "react-hot-toast": "^2.5.2",
+    "svix": "^1.65.0"
+  }
+}
