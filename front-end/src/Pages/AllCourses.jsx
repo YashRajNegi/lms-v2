@@ -105,7 +105,7 @@ const AllCourses = () => {
         const fetchAllCourses = async () => {
             setLoading(true);
             try {
-                const response = await fetch('/api/courses'); // Fetch all courses
+                const response = await fetch(import.meta.env.VITE_API_URL + '/api/courses'); // Fetch all courses
                 if (!response.ok) {
                     throw new Error('Failed to fetch courses');
                 }
