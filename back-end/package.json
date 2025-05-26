@@ -12,11 +12,13 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.13.23",
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.13.1",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "svix": "^1.66.0"
   }
 }
