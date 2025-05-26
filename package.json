@@ -3,5 +3,24 @@
     "@clerk/clerk-sdk-node": "^4.13.23",
     "react-hot-toast": "^2.5.2",
     "svix": "^1.65.0"
-  }
+  },
+  "name": "lms-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YashRajNegi/LMS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YashRajNegi/LMS/issues"
+  },
+  "homepage": "https://github.com/YashRajNegi/LMS#readme"
 }
