@@ -12,21 +12,21 @@ const Contact = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/contact', { name, email, message });
-      
-      // Set message with green color for success
-      setResponseMessage(
-        <p className="mt-4 text-green-600 text-center">{response.data.message}</p>
-      );
+        
+        // Set message with green color for success
+        setResponseMessage(
+            <p className="mt-4 text-green-600 text-center">{response.data.message}</p>
+        );
 
       setName('');
       setEmail('');
       setMessage(''); // Reset form
     } catch (error) {
-      // Set message with red color for error
-      setResponseMessage(
-        <p className="mt-4 text-red-600 text-center">Failed to send message. Please try again later.</p>
-      );
-      console.error('Error submitting form:', error);
+        // Set message with red color for error
+        setResponseMessage(
+            <p className="mt-4 text-red-600 text-center">Failed to send message. Please try again later.</p>
+        );
+        console.error('Error submitting form:', error);
     }
   };
 
@@ -36,36 +36,36 @@ const Contact = () => {
       <p className="mt-4 text-lg text-center">We'd love to hear from you! Please fill out the form below.</p>
       <form onSubmit={handleSubmit} className="mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input
+            <input
             type="text"
             placeholder="Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="p-4 border rounded-lg"
-            required
-          />
-          <input
+              required
+            />
+            <input
             type="email"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="p-4 border rounded-lg"
-            required
-          />
+              required
+            />
         </div>
-        <textarea
+            <textarea
           placeholder="Your Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="mt-4 p-4 border rounded-lg w-full"
           rows="4"
-          required
+              required
         />
         <button type="submit" className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700">
           Send Message
-        </button>
-      </form>
-      {responseMessage && <p className='mt-4 text-center'>{responseMessage}</p>}
+            </button>
+          </form>
+          {responseMessage && <p className='mt-4 text-center'>{responseMessage}</p>}
     </div>
   );
 };

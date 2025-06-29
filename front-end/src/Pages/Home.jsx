@@ -45,7 +45,7 @@ const Home = () => {
         <div className="flex flex-col items-center space-y-7 text-center">
             {/* Hero Section */}
             <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-10 rounded-lg shadow-lg">
-                <h1 className="text-4xl font-bold">Welcome to EduVerse!</h1>
+                <h1 className="text-4xl font-bold">Welcome to E-learning!</h1>
                 <p className="mt-4 text-lg">Transform the way you learn with next-gen E-Learning!</p>
                 <button className="mt-6 px-6 py-2 bg-white text-purple-600 rounded-full shadow-md hover:bg-gray-200">
                     {user ? "View Your Courses" : "Sign Up Now"}
@@ -71,7 +71,7 @@ const Home = () => {
             {/* Testimonials Section */}
             <div className="p-6">
                 <h2 className="text-2xl font-bold">What Our Users Say</h2>
-                <p className="mt-4 italic">"EduVerse has transformed my learning experience!" - Happy Student</p>
+                <p className="mt-4 italic">"E-learning has transformed my learning experience!" - Happy Student</p>
             </div>
 
             {/* Course Previews Section */}

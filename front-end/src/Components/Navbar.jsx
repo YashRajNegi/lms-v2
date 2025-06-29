@@ -37,71 +37,71 @@ const Navbar = () => {
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo and Brand */}
-                    <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavigation("/", "home")}>
+                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => handleNavigation("/", "home")}>
                         <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg flex items-center justify-center">
                             <span className="text-white text-xl font-bold">E</span>
                         </div>
                         <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
-                            EduVerse
+                            E-learning
                         </span>
-                    </div>
+                </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <button 
-                            onClick={() => handleNavigation("/", "home")} 
+                    <button 
+                        onClick={() => handleNavigation("/", "home")} 
                             className={`text-sm font-medium transition-colors duration-200 ${
                                 active === "home" 
                                 ? "text-purple-600" 
                                 : "text-gray-600 hover:text-purple-600"
                             }`}
-                        >
-                            Home
-                        </button>
+                    >
+                        Home
+                    </button>
 
-                        <button 
+                    <button 
                             onClick={() => user ? handleNavigation("/course", "course") : handleNavigation("/courses", "course")} 
                             className={`text-sm font-medium transition-colors duration-200 ${
                                 active === "course" 
                                 ? "text-purple-600" 
                                 : "text-gray-600 hover:text-purple-600"
                             }`}
-                        >
+                    >
                             Courses
-                        </button>
+                    </button>
 
-                        <button 
-                            onClick={() => handleNavigation("/educator", "educator")} 
+                    <button 
+                        onClick={() => handleNavigation("/educator", "educator")} 
                             className={`text-sm font-medium transition-colors duration-200 ${
                                 active === "educator" 
                                 ? "text-purple-600" 
                                 : "text-gray-600 hover:text-purple-600"
                             }`}
-                        >
-                            Educator
-                        </button>
+                    >
+                        Educator
+                    </button>
 
-                        <button 
-                            onClick={() => handleNavigation("/about", "about")} 
+                    <button 
+                        onClick={() => handleNavigation("/about", "about")} 
                             className={`text-sm font-medium transition-colors duration-200 ${
                                 active === "about" 
                                 ? "text-purple-600" 
                                 : "text-gray-600 hover:text-purple-600"
                             }`}
-                        >
-                            About
-                        </button>
+                    >
+                        About
+                    </button>
 
-                        <button 
-                            onClick={() => handleNavigation("/contact", "contact")} 
+                    <button 
+                        onClick={() => handleNavigation("/contact", "contact")} 
                             className={`text-sm font-medium transition-colors duration-200 ${
                                 active === "contact" 
                                 ? "text-purple-600" 
                                 : "text-gray-600 hover:text-purple-600"
                             }`}
-                        >
-                            Contact
-                        </button>
+                    >
+                        Contact
+                    </button>
 
                         {/* Search Bar */}
                         <div className="relative">
@@ -116,30 +116,30 @@ const Navbar = () => {
                         </div>
 
                         {/* Auth Button */}
-                        {user ? (
-                            <UserButton />
-                        ) : (
-                            <button 
-                                onClick={() => openSignIn()} 
+                    {user ? (
+                        <UserButton />
+                    ) : (
+                        <button 
+                            onClick={() => openSignIn()} 
                                 className="px-6 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-blue-500 rounded-full hover:from-purple-700 hover:to-blue-600 transition-all duration-200 shadow-md hover:shadow-lg"
-                            >
-                                Sign In
-                            </button>
-                        )}
-                    </div>
+                        >
+                            Sign In
+                        </button>
+                    )}
+                </div>
 
                     {/* Mobile Menu Button */}
                     <div className="md:hidden flex items-center">
-                        {user ? (
-                            <UserButton />
-                        ) : (
+                    {user ? (
+                        <UserButton />
+                    ) : (
                             <button 
                                 onClick={() => openSignIn()} 
                                 className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-blue-500 rounded-full"
                             >
                                 Sign In
-                            </button>
-                        )}
+                        </button>
+                    )}
                     </div>
                 </div>
             </nav>

@@ -6,21 +6,32 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: true, // Allow all origins
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json()); // Middleware to parse JSON data
 
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+    maxPoolSize: 10, // Maintain up to 10 socket connections
+    serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+    retryWrites: true,
+    w: 'majority'
+})
     .then(() => {
-        console.log("MongoDB Connected Successfully");
+        console.log("MongoDB Atlas Connected Successfully");
         
-        const PORT = process.env.PORT || 5000;
+        const PORT = process.env.PORT || 5001;
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
     })
     .catch(err => {
-        console.error("MongoDB Connection Error:", err);
+        console.error("MongoDB Atlas Connection Error:", err);
         process.exit(1); // Exit if cannot connect to database
     });
 

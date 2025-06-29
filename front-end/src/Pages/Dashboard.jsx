@@ -22,10 +22,11 @@ const Dashboard = () => {
             try {
                 const token = await getToken();
 
-                const response = await fetch('/api/courses/enrolled', {
+                const response = await fetch(import.meta.env.VITE_API_URL + '/api/courses/enrolled', {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
+                    credentials: 'include'
                 });
 
                 if (!response.ok) {

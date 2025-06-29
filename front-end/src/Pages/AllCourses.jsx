@@ -140,7 +140,7 @@ const AllCourses = () => {
         );
 
         try {
-            const response = await fetch(`/api/courses/${courseId}/enroll`, {
+            const response = await fetch(import.meta.env.VITE_API_URL + `/api/courses/${courseId}/enroll`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
