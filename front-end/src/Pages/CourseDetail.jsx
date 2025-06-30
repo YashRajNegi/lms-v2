@@ -51,6 +51,10 @@ const CourseDetail = () => {
     };
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
+
+    useEffect(() => {
         const fetchCourse = async () => {
             try {
                 const apiUrl = import.meta.env.VITE_API_URL;
@@ -512,7 +516,7 @@ const CourseDetail = () => {
     const isCourseCompleted = isEnrolled && progress === 100 && completionDate !== null;
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-2 sm:px-4 py-6 md:py-8">
             {/* Notification */}
             {notification.show && (
                 <div className={`fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
@@ -523,158 +527,114 @@ const CourseDetail = () => {
             )}
 
             {/* Course Header */}
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-                <div className="flex justify-between items-start">
-                    <div>
-                        <h1 className="text-3xl font-bold mb-4">{course?.title}</h1>
-                        <p className="text-gray-600 mb-4">{course?.description}</p>
-                        
-                        {/* Instructor Information */}
-                        {course?.instructorDetails && (
-                            <div className="flex items-center mb-4">
-                                {course.instructorDetails.imageUrl && (
-                                    <img 
-                                        src={course.instructorDetails.imageUrl}
-                                        alt={`${course.instructorDetails.fullName} profile`} 
-                                        className="w-10 h-10 rounded-full mr-3"
-                                    />
-                                )}
-                                <div>
-                                    <p className="text-sm text-gray-500">Instructor:</p>
-                                    <p className="font-semibold">{course.instructorDetails.fullName}</p>
-                                </div>
-                            </div>
-                        )}
-                        
-                        {/* Course Metadata */}
-                        <div className="flex gap-4 mb-4 text-sm text-gray-600">
-                            <span className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                {calculateCourseDuration()}
-                            </span>
-                            <span className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                {course?.level}
-                            </span>
-                            <span className="flex items-center">
-                                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                                </svg>
-                                {course?.category}
-                            </span>
-                        </div>
-
-                        {/* Course Overview */}
-                        <div className="mb-6">
-                            <h2 className="text-xl font-semibold mb-2">Course Overview</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="bg-gray-50 p-4 rounded-lg">
-                                    <h3 className="font-medium mb-2">What you'll learn</h3>
-                                    <ul className="list-disc list-inside space-y-1 text-gray-600">
-                                        {course?.objectives?.map((objective, index) => (
-                                            <li key={index}>{objective}</li>
-                                        )) || <li>Course objectives will be added soon</li>}
-                                    </ul>
-                                </div>
-                                <div className="bg-gray-50 p-4 rounded-lg">
-                                    <h3 className="font-medium mb-2">Prerequisites</h3>
-                                    <ul className="list-disc list-inside space-y-1 text-gray-600">
-                                        {course?.prerequisites?.map((prereq, index) => (
-                                            <li key={index}>{prereq}</li>
-                                        )) || <li>No prerequisites required</li>}
-                                    </ul>
-                                </div>
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6 flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                <div className="flex-1 min-w-0">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 break-words">{course?.title}</h1>
+                    <p className="text-gray-600 mb-4 text-sm sm:text-base break-words">{course?.description}</p>
+                    {/* Instructor Information */}
+                    {course?.instructorDetails && (
+                        <div className="flex items-center mb-4">
+                            {course.instructorDetails.imageUrl && (
+                                <img 
+                                    src={course.instructorDetails.imageUrl}
+                                    alt={`${course.instructorDetails.fullName} profile`} 
+                                    className="w-10 h-10 rounded-full mr-3"
+                                />
+                            )}
+                            <div>
+                                <p className="text-xs sm:text-sm text-gray-500">Instructor:</p>
+                                <p className="font-semibold text-sm sm:text-base">{course.instructorDetails.fullName}</p>
                             </div>
                         </div>
-
-                        {/* Progress Bar (if enrolled) */}
-                        {isEnrolled && (
-                            <div className="mb-4">
-                                <div className="flex justify-between text-sm text-gray-600 mb-1">
-                                    <span>Course Progress</span>
-                                    <span>{Math.round(progress)}%</span>
-                                </div>
-                                <div className="w-full bg-gray-200 rounded-full h-2">
-                                    <div 
-                                        className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                                        style={{ width: `${progress}%` }}
-                                    ></div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="flex gap-4">
-                        <Link
-                            to={`/course/${courseId}/discussions`}
-                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            View Discussions
-                        </Link>
-                        {/* Enroll Button */}
-                        {isLoaded && user && !isEnrolled && (
-                            <button
-                                onClick={handleEnroll}
-                                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
-                                disabled={isEnrolling}
-                            >
-                                {isEnrolling ? 'Enrolling...' : 'Enroll Now'}
-                            </button>
-                        )}
-                        {/* Message if already enrolled */}
-                        {isLoaded && user && isEnrolled && (
-                            <div className="flex items-center gap-4">
-                                <span className="text-green-600 font-semibold flex items-center">
-                                    <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Enrolled
-                                </span>
-                                {isCourseCompleted && ( // Use isCourseCompleted check
-                                    <button
-                                        onClick={() => setShowCertificate(true)}
-                                        className="text-blue-600 hover:text-blue-700 flex items-center"
-                                    >
-                                        <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                        </svg>
-                                        View Certificate
-                                    </button>
-                                )}
-                            </div>
-                        )}
-                        {/* Message if not logged in */}
-                        {(!isLoaded || !user) && (
-                            <span className="text-sm text-gray-500">Sign in to Enroll</span>
-                        )}
+                    )}
+                    {/* Course Metadata */}
+                    <div className="flex flex-wrap gap-2 mb-4 text-xs sm:text-sm text-gray-600">
+                        <span className="flex items-center">
+                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            {calculateCourseDuration()}
+                        </span>
+                        <span className="flex items-center">
+                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            {course?.level}
+                        </span>
+                        <span className="flex items-center">
+                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            {course?.category}
+                        </span>
                     </div>
                 </div>
-
-                {/* Add Lesson Button (Instructor Only) */}
-                {isInstructor && (
-                    <button 
-                        onClick={() => setShowAddLessonForm(true)}
-                        className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 mt-4 mr-4"
+                <div className="flex flex-col gap-2 w-full md:w-auto md:items-end">
+                    <Link
+                        to={`/course/${courseId}/discussions`}
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto text-center"
                     >
-                        Add New Lesson
-                    </button>
-                )}
-
-                {/* Delete Course Button (Instructor Only) */}
-                {isInstructor && (
-                    <button
-                        onClick={handleDeleteCourse}
-                        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mt-4"
-                    >
-                        Delete Course
-                    </button>
-                )}
+                        View Discussions
+                    </Link>
+                    {/* Enroll Button */}
+                    {isLoaded && user && !isEnrolled && (
+                        <button
+                            onClick={handleEnroll}
+                            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50 w-full md:w-auto mt-2"
+                            disabled={isEnrolling}
+                        >
+                            {isEnrolling ? 'Enrolling...' : 'Enroll Now'}
+                        </button>
+                    )}
+                    {/* Message if already enrolled */}
+                    {isLoaded && user && isEnrolled && (
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mt-2 w-full">
+                            <span className="text-green-600 font-semibold flex items-center justify-center sm:justify-start w-full sm:w-auto">
+                                <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Enrolled
+                            </span>
+                            {isCourseCompleted && (
+                                <button
+                                    onClick={() => setShowCertificate(true)}
+                                    className="text-blue-600 hover:text-blue-700 flex items-center justify-center w-full sm:w-auto border border-blue-600 rounded px-4 py-2 transition-colors"
+                                >
+                                    <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    View Certificate
+                                </button>
+                            )}
+                        </div>
+                    )}
+                    {/* Message if not logged in */}
+                    {(!isLoaded || !user) && (
+                        <span className="text-sm text-gray-500 mt-2 text-center">Sign in to Enroll</span>
+                    )}
+                </div>
             </div>
-            
+
+            {/* Add Lesson Button (Instructor Only) */}
+            {isInstructor && (
+                <button 
+                    onClick={() => setShowAddLessonForm(true)}
+                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 mt-4 mr-4"
+                >
+                    Add New Lesson
+                </button>
+            )}
+
+            {/* Delete Course Button (Instructor Only) */}
+            {isInstructor && (
+                <button
+                    onClick={handleDeleteCourse}
+                    className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 mt-4"
+                >
+                    Delete Course
+                </button>
+            )}
+
             {/* Add Lesson Form Modal (Instructor Only) */}
             {isInstructor && showAddLessonForm && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">

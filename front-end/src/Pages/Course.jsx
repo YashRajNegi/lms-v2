@@ -39,14 +39,14 @@ const Course = () => {
     if (error) {
         return (
             <div className="container mx-auto px-2 sm:px-4 py-8">
-                <h1 className="text-2xl sm:text-3xl font-bold text-red-600">{error}</h1>
+                <h1 className="text-base sm:text-lg md:text-xl font-bold text-red-600">{error}</h1>
             </div>
         );
     }
 
   return (
         <div className='flex flex-col items-center justify-center md:pb-16 pb-12 pt-6 px-2 sm:px-4' style={{ backgroundImage: `url(${assets.BG_Course})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <h1 className='md:text-4xl text-3xl text-blue-700 font-extrabold underline md:underline-offset-10 underline-offset-6 md:mb-8 mb-5 text-center'>All Courses</h1>
+            <h1 className='text-2xl sm:text-3xl md:text-4xl text-blue-700 font-extrabold underline md:underline-offset-10 underline-offset-6 md:mb-8 mb-5 text-center'>All Courses</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-2 sm:p-4 w-full max-w-screen-xl mx-auto">
                 {courses.length > 0 ? (
                     courses.map((course) => (
@@ -70,11 +70,11 @@ const Course = () => {
 
                             <div className="flex flex-col flex-grow justify-between py-4 px-3 sm:px-5 h-full">
                                 <div>
-                                    <h1 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1">{course.title}</h1>
-                                    <p className="text-xs sm:text-sm text-gray-500 mb-2">{course.category}</p>
-                                    <p className="text-xs sm:text-sm text-gray-500 mb-4">Level: {course.level}</p>
+                                    <h1 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-1">{course.title}</h1>
+                                    <p className="text-xs sm:text-sm md:text-base text-gray-500 mb-2">{course.category}</p>
+                                    <p className="text-xs sm:text-sm md:text-base text-gray-500 mb-4">Level: {course.level}</p>
                                 </div>
-                                <p className="text-gray-600 text-xs sm:text-sm flex-grow overflow-hidden" style={{display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical'}}>{course.description.substring(0, 150)}{course.description.length > 150 ? '...' : ''}</p>
+                                <p className="text-gray-600 text-xs sm:text-sm md:text-base flex-grow overflow-hidden" style={{display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical'}}>{course.description.substring(0, 150)}{course.description.length > 150 ? '...' : ''}</p>
                             </div>
                         </Link>
                     ))
