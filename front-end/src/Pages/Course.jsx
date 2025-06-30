@@ -16,8 +16,7 @@ const Course = () => {
                     throw new Error('Failed to fetch courses');
                 }
                 const data = await response.json();
-                // Combine fetched courses with static courses (dynamic first)
-                setCourses([...data, ...staticCourses]);
+                setCourses(data);
             } catch (err) {
                 console.error('Error fetching courses:', err);
                 setError('Failed to load courses.');
