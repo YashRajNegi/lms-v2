@@ -53,7 +53,8 @@ const CourseDetail = () => {
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const response = await fetch(`/api/courses/${courseId}`);
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`${apiUrl}/api/courses/${courseId}`);
                 const data = await response.json();
                 setCourse(data);
 
@@ -95,8 +96,8 @@ const CourseDetail = () => {
 
         try {
             const token = await getToken();
-
-            const response = await fetch(`/api/courses/${courseId}/enroll`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/api/courses/${courseId}/enroll`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,7 +128,8 @@ const CourseDetail = () => {
 
         try {
             const token = await getToken();
-            const response = await fetch(`/api/courses/${courseId}/progress`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/api/courses/${courseId}/progress`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -266,7 +268,8 @@ const CourseDetail = () => {
 
         try {
             const token = await getToken();
-            const response = await fetch(`/api/courses/${courseId}/lessons`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/api/courses/${courseId}/lessons`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -319,7 +322,8 @@ const CourseDetail = () => {
 
         try {
             const token = await getToken();
-            const response = await fetch(`/api/courses/${courseId}/lessons/${lessonId}`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/api/courses/${courseId}/lessons/${lessonId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -388,6 +392,7 @@ const CourseDetail = () => {
 
         try {
             const token = await getToken();
+            const apiUrl = import.meta.env.VITE_API_URL;
             const updatedLessonData = {
                 title: editLessonTitle.trim(),
                 duration: parseInt(editLessonDuration, 10) || 30,
@@ -401,7 +406,7 @@ const CourseDetail = () => {
                 },
             };
 
-            const response = await fetch(`/api/courses/${courseId}/lessons/${editingLesson._id}`, {
+            const response = await fetch(`${apiUrl}/api/courses/${courseId}/lessons/${editingLesson._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -445,7 +450,8 @@ const CourseDetail = () => {
 
         try {
             const token = await getToken();
-            const response = await fetch(`/api/courses/${courseId}`, {
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${apiUrl}/api/courses/${courseId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
