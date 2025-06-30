@@ -2,90 +2,6 @@ import React, { useState, useEffect } from "react";
 import { assets } from "../assets/assets";
 import { Link } from 'react-router-dom'; // Import Link for navigation
 
-// Define static courses data (Same as in AllCourses.jsx)
-const staticCourses = [
-  {
-        _id: 'static-course-1',
-        title: 'Introduction to React',
-        description: 'Learn the fundamentals of React.js for building modern user interfaces.',
-        imageUrl: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        category: 'Web Development',
-        level: 'beginner',
-    },
-    {
-        _id: 'static-course-2',
-        title: 'Node.js for Beginners',
-        description: 'Get started with backend development using Node.js and Express.',
-        imageUrl: 'https://images.unsplash.com/photo-1616251100426-c22206d63455?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        category: 'Backend Development',
-        level: 'beginner',
-  },
-  {
-        _id: 'static-course-3',
-        title: 'Data Structures and Algorithms',
-        description: 'Master essential data structures and algorithms for problem-solving.',
-        imageUrl: 'https://images.unsplash.com/photo-1507149824380-b676da9ed57?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        category: 'Computer Science',
-        level: 'intermediate',
-  },
-  {
-        _id: 'static-course-4',
-        title: 'Python for Data Science',
-        description: 'Learn Python and its libraries for data analysis, visualization, and machine learning.',
-        imageUrl: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG00b3RvLXBhZ2V8fHx8ZW58MHx8fHx8A%3D%3D',
-        category: 'Data Science',
-        level: 'intermediate',
-  },
-  {
-        _id: 'static-course-5',
-        title: 'Digital Marketing Fundamentals',
-        description: 'Understand the core concepts of digital marketing, SEO, and social media.',
-        imageUrl: 'https://images.unsplash.com/photo-1557835312-d8d57e3e1168?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        category: 'Marketing',
-        level: 'beginner',
-    },
-    {
-        _id: 'static-course-6',
-        title: 'Introduction to UI/UX Design',
-        description: 'Learn the principles of user interface and user experience design.',
-        imageUrl: 'https://images.unsplash.com/photo-1628139933519-d9c141044975?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        category: 'Design',
-        level: 'beginner',
-  },
-  {
-         _id: 'static-course-7',
-         title: 'Cloud Computing with AWS',
-         description: 'Explore the basics of cloud computing and Amazon Web Services.',
-         imageUrl: 'https://images.unsplash.com/photo-1518770660439-4068ff8cc614?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-         category: 'Cloud Computing',
-         level: 'intermediate',
-  },
-  {
-         _id: 'static-course-8',
-         title: 'Cybersecurity Essentials',
-         description: 'Learn fundamental concepts and practices in cybersecurity.',
-         imageUrl: 'https://images.unsplash.com/photo-1534972195860-c1fa87b01cdc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-         category: 'Cybersecurity',
-         level: 'beginner',
-  },
-  {
-         _id: 'static-course-9',
-         title: 'Mobile App Development with React Native',
-         description: 'Build cross-platform mobile applications using React Native.',
-         imageUrl: 'https://images.unsplash.com/photo-1587620964481-9c1c9c879e58?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-         category: 'Mobile Development',
-         level: 'intermediate',
-     },
-     {
-         _id: 'static-course-10',
-         title: 'Artificial Intelligence Concepts',
-         description: 'An introduction to the core concepts and applications of AI.',
-         imageUrl: 'https://images.unsplash.com/photo-1518458026617-969a0a70c22f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-         category: 'Artificial Intelligence',
-         level: 'advanced',
-     }
-];
-
 const Course = () => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -94,7 +10,8 @@ const Course = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch('/api/courses'); // Fetch courses from backend
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await fetch(`${apiUrl}/api/courses`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch courses');
                 }
