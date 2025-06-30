@@ -11,7 +11,8 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/contact', { name, email, message });
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await axios.post(`${apiUrl}/api/contact`, { name, email, message });
         
         // Set message with green color for success
         setResponseMessage(
