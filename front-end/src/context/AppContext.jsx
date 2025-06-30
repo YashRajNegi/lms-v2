@@ -13,7 +13,8 @@ export const AppContextProvider = (props) => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/courses');
+                const apiUrl = import.meta.env.VITE_API_URL;
+                const response = await axios.get(`${apiUrl}/api/courses`);
                 setCourses(response.data);
                 setLoading(false);
             } catch (err) {
